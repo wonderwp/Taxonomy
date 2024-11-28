@@ -17,12 +17,15 @@ class TaxonomyService extends AbstractTaxonomyService implements RegistrableInte
         },9);
     }
 
-    public function autoload(array $classNameFromFiles = [], array $discoveryPaths = [], callable $successCallback = null): array
+    public function autoload(array $classNameFromFiles = [], array $discoveryPaths = [], callable $successCallback = null, array $excludedClasses=[]): array
     {
-        $defaultPaths = [
-            'taxonomies' => $this->manager->getConfig('path.root') . 'includes' . DIRECTORY_SEPARATOR . 'Taxonomies',
-        ];
+        $discoveryPathsRoots = $this->manager->getConfig('discoveryPathsRoots', [
+            'taxonomies' => rtrim($this->manager->getConfig('path.root'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR
+        ]);
+        $discoverFolderSuffix = $this->manager->getConfig('cptservice.discoverFolderSuffix', 'Taxonomies');
+        $defaultPaths = $this->deductDefaultDiscoveryPaths($discoveryPathsRoots, $discoverFolderSuffix);
         $discoveryPaths = array_merge($defaultPaths, $discoveryPaths);
+
         $autoLoaded = parent::autoload($classNameFromFiles, $discoveryPaths, $successCallback);
 
         if (!empty($this->taxonomies)) {
