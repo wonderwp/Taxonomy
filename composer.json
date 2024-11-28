@@ -1,8 +1,8 @@
 {
-  "name": "wonderwp/Taxonomy",
+  "name": "wonderwp/taxonomy",
   "description": "WonderWp Taxonomy Component",
   "type": "library",
-  "keywords": ["Taxonomy", "Taxonomy", "WonderWp", "WordPress"],
+  "keywords": ["Taxonomy", "WonderWp", "WordPress"],
   "homepage": "https://github.com/wonderwp/Taxonomy",
   "license": "MIT",
   "authors": [
