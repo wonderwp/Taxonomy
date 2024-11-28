@@ -2,10 +2,11 @@
 
 namespace WonderWp\Component\Taxonomy\Service;
 
+use WonderWp\Component\PluginSkeleton\Service\RegistrableInterface;
 use WonderWp\Component\Taxonomy\Definition\TaxonomyInterface;
 use WonderWp\Component\Taxonomy\Response\TaxonomyRegistrationResponseInterface;
 
-interface TaxonomyServiceInterface
+interface TaxonomyServiceInterface extends RegistrableInterface
 {
     /**
      * @return TaxonomyInterface[]

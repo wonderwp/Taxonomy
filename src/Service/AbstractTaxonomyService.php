@@ -72,7 +72,7 @@ abstract class AbstractTaxonomyService extends AbstractService implements Taxono
     public function registerTaxonomy(TaxonomyInterface $taxonomy): TaxonomyRegistrationResponseInterface
     {
         try {
-            $wpRes = register_taxonomy($taxonomy->getKey(), $taxonomy->getArgs());
+            $wpRes = register_taxonomy($taxonomy->getKey(), $taxonomy->getObjectTypes(), $taxonomy->getArgs());
 
             if ($wpRes instanceof \WP_Error) {
                 throw new TaxonomyRegistrationException($wpRes->get_error_message(), $wpRes->get_error_code());
