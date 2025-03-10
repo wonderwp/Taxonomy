@@ -39,7 +39,9 @@ class TaxonomyService extends AbstractTaxonomyService implements RegistrableInte
     {
         $instance = parent::autoloadFile($className, $filePath);
 
-        $this->addTaxonomy($instance);
+        if($instance instanceof TaxonomyInterface) {
+            $this->addTaxonomy($instance);
+        }
 
         return $instance;
     }
