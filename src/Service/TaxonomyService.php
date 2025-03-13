@@ -23,7 +23,7 @@ class TaxonomyService extends AbstractTaxonomyService implements RegistrableInte
         $discoveryPathsRoots = $this->manager->getConfig('discoveryPathsRoots', [
             'taxonomies' => rtrim($this->manager->getConfig('path.root') ?? '', DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR
         ]);
-        $discoverFolderSuffix = $this->manager->getConfig('cptservice.discoverFolderSuffix', 'Taxonomies');
+        $discoverFolderSuffix = $this->manager->getConfig('taxonomyService.discoverFolderSuffix', 'Taxonomies');
         $defaultPaths = $this->deductDefaultDiscoveryPaths($discoveryPathsRoots, $discoverFolderSuffix);
         $discoveryPaths = array_merge($defaultPaths, $discoveryPaths);
 
