@@ -7,9 +7,15 @@ use WonderWp\Component\Taxonomy\Exception\TaxonomyRegistrationException;
 use WonderWp\Component\Taxonomy\Response\TaxonomyRegistrationResponse;
 use WonderWp\Component\Taxonomy\Response\TaxonomyRegistrationResponseInterface;
 use WonderWp\Component\Service\AbstractService;
+use WonderWp\Component\Service\Traits\HasAutoloadingCapabilities;
+use WonderWp\Component\Taxonomy\Traits\HasTaxonomyAutoloader;
 
 abstract class AbstractTaxonomyService extends AbstractService implements TaxonomyServiceInterface
 {
+    use HasAutoloadingCapabilities, HasTaxonomyAutoloader {
+        HasTaxonomyAutoloader::resolveDiscoveryPaths insteadof HasAutoloadingCapabilities;
+        HasTaxonomyAutoloader::afterAutoload insteadof HasAutoloadingCapabilities;
+    }
     /** @var TaxonomyInterface[] */
     protected $taxonomies = [];
 
