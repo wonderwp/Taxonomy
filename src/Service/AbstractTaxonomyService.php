@@ -81,7 +81,9 @@ abstract class AbstractTaxonomyService extends AbstractService implements Taxono
             $wpRes = register_taxonomy($taxonomy->getKey(), $taxonomy->getObjectTypes(), $taxonomy->getArgs());
 
             if ($wpRes instanceof \WP_Error) {
-                throw new TaxonomyRegistrationException($wpRes->get_error_message(), $wpRes->get_error_code());
+                $wpCode = $wpRes->get_error_code();
+                $exceptionCode = is_numeric($wpCode) ? (int) $wpCode : 500;
+                throw new TaxonomyRegistrationException($wpRes->get_error_message(), $exceptionCode);
             } else {
                 $response = new TaxonomyRegistrationResponse(200, TaxonomyRegistrationResponseInterface::SUCCESS);
                 $response->setWpRegistrationResult($wpRes);
